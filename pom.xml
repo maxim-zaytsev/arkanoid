@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.insected</groupId>
+    <artifactId>arkanoid</artifactId>
+    <version>1.0</version>
+    <packaging>swf</packaging>
+    <name>arkanoid</name>
+    <build>
+        <sourceDirectory>src/main/flex</sourceDirectory>
+        <testSourceDirectory>src/test/flex</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <extensions>true</extensions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>3.4.0.9271</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <targetPlayer>10.0.0</targetPlayer>  <!-- compiler option specifying the target flash player version -->
+                    <incremental>false</incremental>
+                    <debug>false</debug>
+                    <optimize>true</optimize>
+                    <showWarnings>true</showWarnings>
+                    <strict>true</strict>
+                    <useNetwork>true</useNetwork>
+                    <allowSourcePathOverlap>true</allowSourcePathOverlap>
+                    <sourcePaths>
+                        <path>${basedir}/src/main/flex</path>
+                    </sourcePaths>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/levels</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/flex/levels</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>3.4.0.9271</version>
+            <type>pom</type>
+            <exclusions>
+                <!-- make sure to exclude the default 'playerglobal' transitive dependency -->
+                <exclusion>
+                    <groupId>com.adobe.flex.framework</groupId>
+                    <artifactId>playerglobal</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <version>3.4.0.9271</version>
+            <!-- this artifact version must match the flex SDK version used in this project -->
+            <classifier>10</classifier>
+            <!-- the classifier specifies the target flash player major version  -->
+            <type>swc</type>
+        </dependency>
+        <!-- flexmojos Unit testing support -->
+        <dependency>
+            <groupId>org.sonatype.flexmojos</groupId>
+            <artifactId>flexmojos-unittest-support</artifactId>
+            <version>3.1.0</version>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- not crossplatfom yet. run install-external.sh script -->
+        <dependency>
+            <groupId>com.adobe</groupId>
+            <artifactId>as3corelib</artifactId>
+            <type>swc</type>
+            <version>0.93</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flexunit</groupId>
+            <artifactId>flexunit</artifactId>
+            <version>0.85</version>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+
+        <repository>
+            <id>flex-mojos-repository</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>yoolab.org-releases</id>
+            <url>http://projects.yoolab.org/maven/content/repositories/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>local</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

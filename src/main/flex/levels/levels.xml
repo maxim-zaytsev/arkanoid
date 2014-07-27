@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"
+        xmlns="http://www.w3schools.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.w3schools.com levels.xsd"
+        ?>
+<levels>
+    <!--<level file="level0.xml"></level>-->
+    <level file="level1.xml"></level>
+    <level file="level2.xml"></level>
+</levels>

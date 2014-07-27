@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
+        width="500" height="700" backgroundColor="white" applicationComplete="init()" frameRate="35">
+	<mx:Script><![CDATA[
+        private function init():void {
+            container.addChild(new Game());
+        }
+        ]]></mx:Script>
+    <mx:UIComponent id="container"/>
+</mx:Application>
