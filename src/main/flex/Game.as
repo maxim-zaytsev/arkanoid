@@ -73,7 +73,7 @@ public class Game extends UIComponent {
         if (contains(target) && target.parent == this) {
             var childIndex:int = getChildIndex(target);
             getChildAt(childIndex).visible = true;
-            setChildIndex(getChildAt(childIndex), 0);
+            setChildIndex(getChildAt(childIndex), numChildren-1);
         } else {
             addChild(target);
         }
