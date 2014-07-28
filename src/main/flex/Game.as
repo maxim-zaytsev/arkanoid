@@ -180,9 +180,7 @@ public class Game extends UIComponent {
             }
         });
         loader.addEventListener(IOErrorEvent.IO_ERROR, function (e:Event):void {
-            splashManager.addEventListener(SplashScreenEvent.RESTART_GAME, function (e:Event):void {
-                trace("restart game");
-            });
+            splashManager.addEventListener(SplashScreenEvent.RESTART_GAME, onRestartGame);
         });
     }
 
